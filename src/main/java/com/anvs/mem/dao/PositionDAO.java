@@ -14,7 +14,7 @@ import com.anvs.mem.model.Position;
  */
 public class PositionDAO {
 	
-	public Position getPosition(final int id ) {
+	public Position getById(final int id ) {
 		
 		return null;
 	}
