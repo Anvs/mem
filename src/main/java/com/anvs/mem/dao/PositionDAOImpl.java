@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 
 import com.anvs.mem.model.Position;
+import com.anvs.mem.service.DbServce;
 
 /**
  * Class provides CRUD operations for Position class
@@ -13,9 +14,13 @@ import com.anvs.mem.model.Position;
  */
 public class PositionDAOImpl implements PositionDAO {
 	
-	public Position getById(final int id ) {
-		
-		return null;
+	private DbServce service = new DbServce();
+	
+	public Position getById(final Long id ) {
+		Position result = new Position();
+		service.connect().load(result, id);
+		service.disconnect();
+		return result;
 	}
 	
 	public List<Position> getFilteredSet(Criteria filter) {
@@ -24,7 +29,8 @@ public class PositionDAOImpl implements PositionDAO {
 	}
 	
 	public void delete(Position positionToDelete) {
-
+		service.connect().delete(positionToDelete);
+		service.disconnect();
 	}
 	
 	public void insert(Position newPosition) {
@@ -36,7 +42,15 @@ public class PositionDAOImpl implements PositionDAO {
 		 * 
 		 * Handle errors
 		 * */
+		service.connect().save(newPosition);
+		service.disconnect();
 		
+	}
+
+	public void save(Position newStateItem) {
+		// TODO: check existing of newStateItem
+		service.connect().save(newStateItem);
+		service.disconnect();
 	}
 
 }

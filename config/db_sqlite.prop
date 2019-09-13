@@ -1,0 +1,14 @@
+connection.driver_class = org.sqlite.JDBC
+connection.url = jdbc:sqlite:mem.db
+connection.username
+connection.password
+show_sql = true
+format_sql = true
+
+dialect = org.hibernate.dialect.SQLiteDialect
+#dialect = dialect.SQLiteDialect
+
+hdm2ddl.auto = create-drop
+#hbm2ddl.auto = update
+
+hibernate.connection.autocommit = false

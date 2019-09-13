@@ -8,7 +8,7 @@ import com.anvs.mem.model.Position;
 
 public interface PositionDAO {
 		
-		Position getById(final int id );
+		Position getById(final Long id );
 		
 		List<Position> getFilteredSet(Criteria filter);
 		
@@ -23,6 +23,7 @@ public interface PositionDAO {
 		 * Handle errors
 		 * */
 		void insert(Position newPosition);
-
+		
+		void save(Position newStateItem);
 
 }
