@@ -6,6 +6,11 @@ import org.hibernate.Criteria;
 
 import com.anvs.mem.model.Position;
 
+/**
+ * Provides CRUD operations for Position class
+ * @author anvs
+ *
+ */
 public interface PositionDAO {
 		
 		Position getById(final int id );
@@ -24,5 +29,5 @@ public interface PositionDAO {
 		 * */
 		void insert(Position newPosition);
 
-
+		void save(Position newStateItem);
 }
