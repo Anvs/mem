@@ -1,11 +1,11 @@
-connection.driver_class = org.sqlite.JDBC
-connection.url = jdbc:sqlite:mem.db
-connection.username
-connection.password
+hibernate.connection.driver_class = org.sqlite.JDBC
+hibernate.connection.url = jdbc:sqlite:/home/anvs/JAVA/eclipse-workspace/com.anvs.mem/mem.db
+#hibernate.connection.username
+#hibernate.connection.password
 show_sql = true
 format_sql = true
 
-dialect = org.hibernate.dialect.SQLiteDialect
+hibernate.dialect = org.hibernate.dialect.SQLiteDialect
 #dialect = dialect.SQLiteDialect
 
 hdm2ddl.auto = create-drop

@@ -3,7 +3,6 @@ package com.anvs.mem.dao;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
-
 import com.anvs.mem.model.Position;
 import com.anvs.mem.service.DbServce;
 
@@ -49,6 +48,7 @@ public class PositionDAOImpl implements PositionDAO {
 
 	public void save(Position newStateItem) {
 		// TODO: check existing of newStateItem
+		
 		service.connect().save(newStateItem);
 		service.disconnect();
 	}
