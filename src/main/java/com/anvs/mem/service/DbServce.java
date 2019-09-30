@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+
 import com.anvs.mem.Messages;
 
 
@@ -42,7 +43,7 @@ public class DbServce {
 //		return dbConnector;
 //	}
 	
-	public Session connect() {
+	public Session getEstablishedConnection() {
 		if (connection == null) connection = dbConnector.openSession();
 		
 		return connection;

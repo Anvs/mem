@@ -16,8 +16,8 @@ public class PositionDAOImpl implements PositionDAO {
 	private DbServce service = new DbServce();
 	
 	public Position getById(final Long id ) {
-		Position result = new Position();
-		service.connect().load(result, id);
+		Position result = null;//new Position();
+		service.getEstablishedConnection().load(result, id);
 		service.disconnect();
 		return result;
 	}
@@ -28,7 +28,7 @@ public class PositionDAOImpl implements PositionDAO {
 	}
 	
 	public void delete(Position positionToDelete) {
-		service.connect().delete(positionToDelete);
+		service.getEstablishedConnection().delete(positionToDelete);
 		service.disconnect();
 	}
 	
@@ -41,7 +41,7 @@ public class PositionDAOImpl implements PositionDAO {
 		 * 
 		 * Handle errors
 		 * */
-		service.connect().save(newPosition);
+		service.getEstablishedConnection().save(newPosition);
 		service.disconnect();
 		
 	}
@@ -49,7 +49,7 @@ public class PositionDAOImpl implements PositionDAO {
 	public void save(Position newStateItem) {
 		// TODO: check existing of newStateItem
 		
-		service.connect().save(newStateItem);
+		service.getEstablishedConnection().save(newStateItem);
 		service.disconnect();
 	}
 
