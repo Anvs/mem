@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
 import com.anvs.mem.model.Position;
-import com.anvs.mem.service.DbServce;
+import com.anvs.mem.service.SessionHandler;
 
 /**
  * Class provides CRUD operations for Position class
@@ -13,7 +13,7 @@ import com.anvs.mem.service.DbServce;
  */
 public class PositionDAOImpl implements PositionDAO {
 	
-	private DbServce service = new DbServce();
+	private SessionHandler service = new SessionHandler();
 	
 	public Position getById(final Long id ) {
 		Position result = null;//new Position();

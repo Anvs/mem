@@ -2,7 +2,7 @@ package com.anvs.mem;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import com.anvs.mem.service.DbServce;
+import com.anvs.mem.service.SessionHandler;
 
  /**
  * Hello world!
@@ -11,7 +11,7 @@ import com.anvs.mem.service.DbServce;
 public class App 
 {
     public static void main( String[] args ) {
-//    	DbServce dbServ = new DbServce();
+//    	SessionHandler dbServ = new SessionHandler();
 //        SQLiteDbSessionProperties dbProps = new SQLiteDbSessionProperties("mem.db");
 //        SessionFactory sf = dbServ.buildSessionFactory(dbProps.getProps());
 //        Session s = sf.getCurrentSession();

@@ -11,13 +11,15 @@ import org.hibernate.cfg.Configuration;
 import com.anvs.mem.Messages;
 
 
-public class DbServce {
+public class SessionHandler {
 	
-	private final static String PROPERTIES_FILENAME = "config/db_sqlite.prop";
+	//private final static String PROPERTIES_FILENAME = "config/db_sqlite.prop";
+	private final static String PROPERTIES_FILENAME = "config/db_sqlite_win.prop";
 	
 	private static SessionFactory dbConnector = null;
 	
 	private static Session connection = null;
+	
 	
 	static {
 		Properties configProperties = new Properties();
@@ -50,6 +52,23 @@ public class DbServce {
 	}
 
 	public void disconnect() {
-		if (connection.isOpen()) connection.close();
+		if (connection.isOpen()) { 
+			connection.close();
+			connection = null;
+		}
+	}
+	
+	public void beginTransaction() {
+		this.getEstablishedConnection().beginTransaction();
+	}
+	
+	public void closeWithCommit() {
+		this.getEstablishedConnection().getTransaction().commit();
+		this.disconnect();
+	}
+	
+	public void closeWithRollback() {
+		this.getEstablishedConnection().getTransaction().rollback();
+		this.disconnect();
 	}
 }
