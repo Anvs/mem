@@ -1,12 +1,14 @@
 package com.anvs.mem.model;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Table;
 
+@Entity
 @DynamicUpdate
 @Table(appliesTo = "SALARIED_POSITION")
 public class Position {
