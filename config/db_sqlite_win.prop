@@ -1,0 +1,14 @@
+hibernate.connection.driver_class = org.sqlite.JDBC
+hibernate.connection.url = jdbc:sqlite:c:\java\eclipse-workspace\mem\mem.db
+#hibernate.connection.username
+#hibernate.connection.password
+show_sql = true
+format_sql = true
+
+hibernate.dialect = org.hibernate.dialect.SQLiteDialect
+#dialect = dialect.SQLiteDialect
+
+hdm2ddl.auto = create-drop
+#hbm2ddl.auto = update
+
+hibernate.connection.autocommit = false

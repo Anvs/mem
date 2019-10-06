@@ -2,3 +2,4 @@ target/
 .settings/
 sqlite-jdbc-3.27.2.1.jar
 .classpath
+/.project

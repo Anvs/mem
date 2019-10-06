@@ -14,7 +14,7 @@ import org.hibernate.annotations.Table;
 public class Position {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_POSITION")
-	private int id;
+	private Long id;
 	
 	@Column(name = "DESCR")
 	private String name;
@@ -28,10 +28,10 @@ public class Position {
 		this.name = name;
 	}
 		
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
