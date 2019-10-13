@@ -1,5 +1,7 @@
 import static org.junit.Assert.*;
 
+import java.io.Serializable;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -7,24 +9,31 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.anvs.mem.dao.PositionDAO;
+import com.anvs.mem.dao.DAO;
 import com.anvs.mem.dao.PositionDAOImpl;
 import com.anvs.mem.model.Position;
 
 public class PositionDAOImplTest {
-	Position forTest;
+	private static Position testEntity;
+	
+	private static DAO<Position> testDaoObject = null;
+	private static Long persistId = null; 
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		testDaoObject = new PositionDAOImpl();
+		testEntity = new Position("For test");
+		persistId = (Long) testDaoObject.insert(testEntity);
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		testDaoObject.delete(testEntity);
 	}
 
 	@Before
 	public void setUp() throws Exception {
-		forTest = new Position("For test");
+
 	}
 
 	@After
@@ -33,14 +42,14 @@ public class PositionDAOImplTest {
 	
 	@Test
 	public final void testSave() {
-		PositionDAO testedObject = new PositionDAOImpl();
-		testedObject.save(forTest);
+		testEntity.setName(testEntity.getName() + " updated");
+		testDaoObject.update(testEntity);
+		assertEquals("For test updated", testDaoObject.findById(persistId));
 	}
 
 	@Test
-	@Ignore
 	public final void testGetById() {
-		fail("Not yet implemented"); // TODO
+		assertNotNull(testDaoObject.findById(persistId));
 	}
 
 	@Test
@@ -50,15 +59,19 @@ public class PositionDAOImplTest {
 	}
 
 	@Test
-	@Ignore
 	public final void testDelete() {
-		fail("Not yet implemented"); // TODO
+		testEntity = new Position("Must be deleted");
+		Serializable id = testDaoObject.insert(testEntity);
+		testEntity = testDaoObject.findById((Long) id);
+		testDaoObject.delete(testEntity);
+		assertEquals("", testDaoObject.findById((Long) id).getName());
 	}
 
 	@Test
-	@Ignore
 	public final void testInsert() {
-		fail("Not yet implemented"); // TODO
+		testEntity = new Position("For test");
+		assertNotNull(testDaoObject.insert(testEntity));
+		testDaoObject.delete(testEntity);
 	}
 
 

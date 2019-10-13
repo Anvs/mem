@@ -2,7 +2,7 @@ package com.anvs.mem;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import com.anvs.mem.service.SessionHandler;
+import com.anvs.mem.service.SessionHandlerImpl;
 
  /**
  * Hello world!

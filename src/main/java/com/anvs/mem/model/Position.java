@@ -3,17 +3,25 @@ package com.anvs.mem.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.Table;
+//import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.TableGenerator;
 
 @Entity
-@DynamicUpdate
-@Table(appliesTo = "SALARIED_POSITION")
+//@DynamicUpdate
+
+
+//@Table(appliesTo = "SALARIED_POSITION")
+@javax.persistence.Table(name = "SALARIED_POSITION")
 public class Position {
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+//	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(generator="sqlite")
+	@TableGenerator(name="sqlite", table="sqlite_sequence",
+	    pkColumnName="name", valueColumnName="seq",
+	    pkColumnValue="SALARIED_POSITION")
 	@Column(name = "ID_POSITION")
+	
 	private Long id;
 	
 	@Column(name = "DESCR")
