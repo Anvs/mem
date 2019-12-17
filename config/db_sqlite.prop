@@ -1,5 +1,8 @@
 hibernate.connection.driver_class = org.sqlite.JDBC
-hibernate.connection.url = jdbc:sqlite:/home/anvs/JAVA/eclipse-workspace/com.anvs.mem/mem.db
+#  DB path for Linux
+#hibernate.connection.url = jdbc:sqlite:/home/anvs/JAVA/eclipse-workspace/com.anvs.mem/mem.db
+#  DB path for Windows
+hibernate.connection.url = jdbc:sqlite:c:\\java\\eclipse-workspace\\mem\\mem.db
 #hibernate.connection.username
 #hibernate.connection.password
 show_sql = true

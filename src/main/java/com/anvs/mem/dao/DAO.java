@@ -5,13 +5,15 @@ import java.util.List;
 
 public interface DAO<T, I extends Serializable> {
 		
-		T findById(final I id);
+	List<T> findAll();		
+	
+	T findById(final I id);
+	
+	List<T> findByExample(T example);
 		
-		List<T> findAll();
+	List<T> findBySQLQuery(String sql);
 		
-		List<T> findWithFilter(T exampleInstance);
-		
-		void delete(T  entityToDelete);
+	void delete(T  entityToDelete);
 		
 		/* insert(...)
 		 * Connect to DB
@@ -21,8 +23,8 @@ public interface DAO<T, I extends Serializable> {
 		 * 
 		 * Handle errors
 		 * */
-		Serializable insert(T newEntity);
+	Serializable insert(T newEntity);
 		
-		T update(T newStateItem);
+	T update(T newStateItem);
 
 }

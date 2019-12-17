@@ -4,7 +4,7 @@ import org.hibernate.Session;
 
 public interface SessionHandler {
 
-	Session getEstablishedSession();
+	Session getSession();
 
 	void beginTransaction();
 

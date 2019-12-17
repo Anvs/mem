@@ -1,5 +1,7 @@
 package com.anvs.mem.model;
 
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,12 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.TableGenerator;
 
 @Entity
-//@DynamicUpdate
-
-
-//@Table(appliesTo = "SALARIED_POSITION")
 @javax.persistence.Table(name = "SALARIED_POSITION")
 public class Position {
+	
 	@Id
 //	@GeneratedValue(strategy = GenerationType.AUTO)
 	@GeneratedValue(generator="sqlite")
@@ -21,7 +20,6 @@ public class Position {
 	    pkColumnName="name", valueColumnName="seq",
 	    pkColumnValue="SALARIED_POSITION")
 	@Column(name = "ID_POSITION")
-	
 	private Long id;
 	
 	@Column(name = "DESCR")
@@ -30,6 +28,7 @@ public class Position {
 
 	public Position() {
 		this.name = "";
+		this.id = null;
 	}
 	
 	public Position(String name) {
@@ -49,6 +48,23 @@ public class Position {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, name);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof Position)) {
+			return false;
+		}
+		Position other = (Position) obj;
+		return Objects.equals(id, other.id) && Objects.equals(name, other.name);
 	}
 
 	

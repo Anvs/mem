@@ -29,12 +29,12 @@ public class SessionHandlerTest {
 	}
 
 	/**
-	 * Test method for {@link com.anvs.mem.service.SessionHandlerImpl#getEstablishedSession()}.
+	 * Test method for {@link com.anvs.mem.service.SessionHandlerImpl#getSession()}.
 	 */
 	@Test
 	public final void testGetEstablishedConnection() {
-		assertNotNull(sessionHandler.getEstablishedSession());
-		assertTrue(sessionHandler.getEstablishedSession().isConnected());
+		assertNotNull(sessionHandler.getSession());
+		assertTrue(sessionHandler.getSession().isConnected());
 		sessionHandler.disconnect();
 	}
 
@@ -43,16 +43,16 @@ public class SessionHandlerTest {
 	 */
 	@Test
 	public final void testTransactionRollback() {
-		sessionHandler.getEstablishedSession();
-		sessionHandler.getEstablishedSession();
+		sessionHandler.getSession();
+		sessionHandler.getSession();
 		sessionHandler.beginTransaction();
 		sessionHandler.closeWithRollback();
 	}
 	
 	@Test
 	public final void testTransactionCommit() {
-		sessionHandler.getEstablishedSession();
-		sessionHandler.getEstablishedSession();
+		sessionHandler.getSession();
+		sessionHandler.getSession();
 		sessionHandler.beginTransaction();
 		sessionHandler.closeWithCommit();;
 	}

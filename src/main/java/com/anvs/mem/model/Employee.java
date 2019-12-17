@@ -1,57 +1,80 @@
 package com.anvs.mem.model;
+ 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Objects;
 
-//import javax.persistence.Entity;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.OneToOne;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.TableGenerator;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.*;
+//CREATE TABLE SALARIED_PERSONS 
+//	(ID_PERSON int primary key
+//	, FIO varchar(100) NOT NULL
+//	, ADDDATE datetime default CURRENT_TIMESTAMP NULL
+//	, ID_COMPANY int NULL
+//	, id_position int NOT NULL
+//	, archive int default 0 NULL
+//	, citizenOf varchar(50) NULL
+//	, passpotSer varchar(10) NULL
+//	, passportNum varchar(10) NULL
+//	, passportDepName varchar(100) NULL
+//	, passportDepCode varchar(10) NULL
+//	, passportDate datetime NULL);
 
-
-//CREATE TABLE SALARIED_PERSONS(ID_PERSON int primary key, FIO varchar(100) NOT NULL,  ADDDATE datetime default CURRENT_TIMESTAMP NULL, ID_COMPANY int NULL, id_position int NOT NULL, archive int default 0 NULL, citizenOf varchar(50) NULL, passpotSer varchar(10) NULL, passportNum varchar(10) NULL, passportDepName varchar(100) NULL, passportDepCode varchar(10) NULL, passportDate datetime NULL);
-
-//@Entity
-@DynamicUpdate
-@Table(appliesTo = "SALARIED_PERSONS")
+@Entity
+@javax.persistence.Table(name = "SALARIED_PERSONS")
 public class Employee {
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(generator="sqlite")
+	@TableGenerator(name="sqlite", table="sqlite_sequence",
+	    pkColumnName="name", valueColumnName="seq",
+	    pkColumnValue="SALARIED_PERSONS")
 	@Column(name = "ID_PERSON")
-	private int id;
+	private Long id;
 	
 	@Column(name = "FIO")
 	private String fio;
 	
-	@OneToOne()
-	@Column(name = "ID_COMPANY")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "ID_COMPANY")
 	private Company company;
 	
-	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "ID_POSITION")
 	private Position position;
 	
 	@Column(name = "ARCHIVE")
 	private boolean isArchived;
 	
-	@Column(name = "COTOZENOF")
+	@Column(name = "CITIZENOF")
 	private String citizenship;
 	
 	@Column(name = "PASSPOTSER")
 	private String passpotPrefix;
 	
-	@Column(name = "PASSPOTNUM")
+	@Column(name = "PASSPORTNUM")
 	private String passportNumber;
 	
-	@Column(name = "PASSPOTDEPNAME")
+	@Column(name = "PASSPORTDEPNAME")
 	private String passportDepName;
 	
-	@Column(name = "PASSPOTDEPCODE")
+	@Column(name = "PASSPORTDEPCODE")
 	private String passportDepCode;
 	
-	@Column(name = "PASSPOTDATE")
-	private Date passportDate;
-	
+	@Column(name = "PASSPORTDATE")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar passportDate;
+	//private Date passportDate;
 	
 	public Employee() {
 		this.fio = "";
@@ -63,11 +86,11 @@ public class Employee {
 		this.passportNumber = "";
 		this.passportDepName = "";
 		this.passportDepCode = "";
-		this.passportDate = new Date();
+		this.passportDate = new GregorianCalendar(2000, 01, 01);
 	}
 	public Employee(String fio, Company company, Position position, boolean isArchived, String citizenship,
 			String passpotPrefix, String passportNumber, String passportDepName, String passportDepCode,
-			Date passportDate) {
+			Calendar passportDate) {
 		this.fio = fio;
 		this.company = company;
 		this.position = position;
@@ -133,17 +156,40 @@ public class Employee {
 	public void setPassportDepCode(String passportDepCode) {
 		this.passportDepCode = passportDepCode;
 	}
-	public Date getPassportDate() {
+	public Calendar getPassportDate() {
 		return passportDate;
 	}
-	public void setPassportDate(Date passportDate) {
+	public void setPassportDate(Calendar passportDate) {
 		this.passportDate = passportDate;
 	}
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(citizenship, company, fio, id, isArchived, passportDate, passportDepCode, passportDepName,
+				passportNumber, passpotPrefix, position);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof Employee)) {
+			return false;
+		}
+		Employee other = (Employee) obj;
+		return Objects.equals(citizenship, other.citizenship) && Objects.equals(company, other.company)
+				&& Objects.equals(fio, other.fio) && Objects.equals(id, other.id) && isArchived == other.isArchived
+				&& Objects.equals(passportDate, other.passportDate)
+				&& Objects.equals(passportDepCode, other.passportDepCode)
+				&& Objects.equals(passportDepName, other.passportDepName)
+				&& Objects.equals(passportNumber, other.passportNumber)
+				&& Objects.equals(passpotPrefix, other.passpotPrefix) && Objects.equals(position, other.position);
+	}
+	
 	
 }
